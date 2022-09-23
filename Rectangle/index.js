@@ -13,7 +13,7 @@ function createRectangle() {
     var rectangle = new Rectangle(200, 200, dai, rong);
     ctx.beginPath();
     ctx.fillRect(rectangle.x, rectangle.y, rectangle.dai, rectangle.rong);
-    ctx.fillStyle = "#FF0000";
+    ctx.COLOR = "#FF0000";
     ctx.fill();
     document.getElementById("canh1").innerText = "canh 1 = " + dai
     document.getElementById("canh2").innerText = "canh 2 = " + rong
