@@ -4,6 +4,8 @@ function Hero(image, top, left, size, speed) {
     this.left = left;
     this.size = size;
     this.speed = speed;
+    this.width = 200;
+    this.height = 200;
 
     this.getHeroElement = function () {
         return '<img width="' + this.size + '"' +
@@ -14,45 +16,37 @@ function Hero(image, top, left, size, speed) {
 
     this.moveRight = function () {
         this.left += this.speed;
-    }
-
+    };
     this.moveLeft = function () {
         this.left -= this.speed;
-    }
-
-    this.moveTop = function () {
-        this.top += this.speed
-    }
+    };
+    this.moveUp = function () {
+        this.top -= this.speed;
+    };
     this.moveDown = function () {
-        this.top -= this.speed
+        this.top += this.speed;
     }
 
 }
 
-var hero = new Hero('1.png', 20, 30, 200, 300);
+var hero = new Hero('1.png', 20, 30, 200, 50);
+let width_limit = window.innerWidth - hero.width;
+let height_limit = window.innerHeight-hero.height;
 
+function start(){
+    if(hero.left < width_limit && hero.top === 20){
+        hero.moveRight();
+    } else if (hero.left >= width_limit && hero.top < height_limit){
+        hero.moveDown();
 
-function start() {
-    document.onkeydown = checkKey;
-
-    function checkKey(e) {
-
-        e = e || window.event;
-
-        if (e.keyCode == '38') {
-            hero.moveDown()
-        } else if (e.keyCode == '40') {
-            hero.moveTop()
-        } else if (e.keyCode == '37') {
-            hero.moveLeft()
-        } else if (e.keyCode == '39') {
-            hero.moveRight();
-        }
-
+    } else if (hero.left> 30 && hero.top > height_limit){
+        hero.moveLeft();
+    } else {
+        hero.moveUp()
     }
 
     document.getElementById('game').innerHTML = hero.getHeroElement();
-    setTimeout(start, 200)
+    setTimeout(start, 100);
 }
 
-start();
+start();;
